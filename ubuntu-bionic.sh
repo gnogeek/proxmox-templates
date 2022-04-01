@@ -85,7 +85,7 @@ case $OPT_IMAGE_TEMPLATE in
 		;;
 esac
 ####
-TEMPL_NAME="ubuntu18.04-cloud"
+#TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
 CORES="2"
 MEM="1024"
@@ -96,7 +96,7 @@ NET_BRIDGE="vmbr0"
 #IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
 #wget -nc -O $IMG_NAME $SRC_IMG
 virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent
-qm create $VMID --name $TEMPL_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
+qm create $VMID --name $TEMPLATE_VM_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
 qm importdisk $VMID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $VMID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$VMID-disk-0
 qm set $VMID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
