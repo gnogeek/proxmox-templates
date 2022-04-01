@@ -10,8 +10,8 @@ DISK_STOR="local-lvm"
 NET_BRIDGE="vmbr0"
 SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
-virt-customize -a $IMG_NAME --install qemu-guest-agent
 wget -O $IMG_NAME $SRC_IMG
+virt-customize -a $IMG_NAME --install qemu-guest-agent
 qm create $VMID --name $TEMPL_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
 qm importdisk $VMID $IMG_NAME $DISK_STOR
 qm set $VMID --scsihw virtio-scsi-pci --scsi0 $DISK_STOR:vm-$VMID-disk-0
