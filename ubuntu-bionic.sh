@@ -70,8 +70,6 @@ case $OPT_IMAGE_TEMPLATE in
 		exit
 		;;
 esac
-clear
-
 ####
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
