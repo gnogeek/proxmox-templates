@@ -1,21 +1,11 @@
 #!/bin/bash
 ### VM Storage
-clear
-echo "########## STORAGE ##########"
-echo ""
-echo Storage Availability|awk '{ printf "%-20s %-40s\n", $1, $2 }'
-pvesm status|grep active|awk '{ printf "%-20s %-40s\n", $1, $7 }'
-echo -n "Type name of Storage to install VM: "
-read TEMPLATE_VM_STORAGE
-###mkdir -p ~/Template
-#cp ~/.ssh/id_rsa.pub
-####Parameters
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
 CORES="2"
 MEM="1024"
 DISK_SIZE="8G"
-DISK_STOR=$TEMPLATE_VM_STORAGE
+DISK_STOR="local-lvm"
 NET_BRIDGE="vmbr0"
 SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
