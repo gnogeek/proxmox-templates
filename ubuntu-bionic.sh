@@ -102,17 +102,17 @@ NET_BRIDGE="vmbr0"
 #IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
 #wget -nc -O $IMG_NAME $SRC_IMG
 virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent
-qm create $VMID --name $TEMPLATE_VM_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
+qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
 qm importdisk $VMID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
-qm set $VMID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$VMID-disk-0
-qm set $VMID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
-qm set $VMID --boot c --bootdisk scsi0
-qm set $VMID --serial0 socket --vga serial0
-qm set $VMID --ipconfig0 ip=dhcp
-qm set $VMID --ciuser gnolasco
-qm set $VMID --agent enabled=1
-qm resize $VMID scsi0 $DISK_SIZE
-qm set $VMID --sshkey ~/.ssh/id_rsa.pub
+qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
+qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
+qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
+qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
+qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
+qm set $TEMPLATE_VM_ID --ciuser gnolasco
+qm set $TEMPLATE_VM_ID --agent enabled=1
+qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
+qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
 #qm template $VMID
 # Remove downloaded image
 #rm $IMG_NAME
