@@ -20,6 +20,7 @@ qm set $VMID --boot c --bootdisk scsi0
 qm set $VMID --serial0 socket --vga serial0
 qm set $VMID --ipconfig0 ip=dhcp
 qm set $VMID --ciuser gnolasco
+qm set $VM_ID --agent enabled=1
 qm resize $VMID scsi0 $DISK_SIZE
 qm set $VMID --sshkey ~/.ssh/id_rsa.pub
 #qm template $VMID
