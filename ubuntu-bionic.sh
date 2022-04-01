@@ -92,7 +92,7 @@ case $OPT_IMAGE_TEMPLATE in
 esac
 ####
 #TEMPL_NAME="ubuntu18.04-cloud"
-VMID="9005"
+#VMID="9005"
 CORES="2"
 MEM="1024"
 DISK_SIZE="8G"
