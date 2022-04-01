@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p ~/Template/sshkey
+#mkdir -p ~/Template/sshkey
 #cp ~/.ssh/id_rsa.pub 
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
