@@ -39,18 +39,26 @@ echo -n "Memory Options:
 1 - 1GB
 2 - 2GB
 3 - 4GB
-
+4 - 8GB
+5 - 16GB
 Select VM Memory option (1-5): "
-read MEM_SIZE
+read MEM_SIZE_GB
 
-case $MEM_SIZE in
+case $MEM_SIZE_GB in
 	1)
 	MEM_SIZE=1024
 	;;
 	2)
-	MEM_SIZE=2048
+		MEM_SIZE=2048
 	;;
-			MEM_SIZE=4096
+	3)
+		MEM_SIZE=4096
+	;;
+	4)
+		MEM_SIZE=8192
+	;;
+	5)
+		MEM_SIZE=16384
 	;;
         *)
                 clear
