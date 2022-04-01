@@ -82,8 +82,9 @@ case $DISK_SIZE_GB in
 	2)
 		DISK_SIZE=20480
 	;;
-			DISK_SIZE=40960
-	;;
+	3)
+		DISK_SIZE=40960
+	;;	
         *)
                 clear
                 echo "[Fail] - Unknown option - Run script again then choose a valid option."
