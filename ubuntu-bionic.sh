@@ -7,6 +7,12 @@ echo -n "Type VM Name: "
 read TEMPLATE_VM_NAME
 ### VM Storage
 clear
+### VM TEMPLATE ID
+echo "Choose a UNIQ ID for VM, please, do not use any of bellow IDs"
+pvesh get /cluster/resources --type vm|grep qemu|awk '{ print $2}'|cut -d"/" -f2
+echo -n "Type a uniq ID for VM: "
+read TEMPLATE_VM_ID
+clear
 echo "########## STORAGE ##########"
 echo ""
 echo Storage Availability|awk '{ printf "%-20s %-40s\n", $1, $2 }'
