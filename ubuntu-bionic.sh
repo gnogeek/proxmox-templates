@@ -9,7 +9,8 @@ echo -n "Type name of Storage to install VM: "
 read TEMPLATE_VM_STORAGE
 
 #mkdir -p ~/Template
-#cp ~/.ssh/id_rsa.pub 
+#cp ~/.ssh/id_rsa.pub
+clear
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
 CORES="2"
