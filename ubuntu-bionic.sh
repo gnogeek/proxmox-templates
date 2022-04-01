@@ -112,6 +112,7 @@ UBUNTU_1804_URL="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cl
 UBUNTU_2004_URL="https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
 OPENSUSE_152_URL="https://download.opensuse.org/repositories/Cloud:/Images:/Leap_15.2/images/openSUSE-Leap-15.2-OpenStack.x86_64.qcow2"
 CENTOS_8_URL="https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2"
+CENTOS_9_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220330.1.x86_64.qcow2"
 ####
 echo "Available images are: "
 echo -n "
@@ -121,6 +122,7 @@ echo -n "
 4 - Ubuntu 20.04 LTS - Focal
 5 - OpenSUSE LEAP 15.02
 6 - CentOS 8
+7 - CentOS 9
 "
 echo -n "Choose a Image template to install: "
 read OPT_IMAGE_TEMPLATE
@@ -160,6 +162,12 @@ case $OPT_IMAGE_TEMPLATE in
 		TEMPLATE_VM_CI_IMAGE="$IMG_PATH/${CENTOS_8_URL##*/}"
 		if [ ! -f $TEMPLATE_VM_CI_IMAGE ]; then
 			wget -nc $CENTOS_8_URL -O $TEMPLATE_VM_CI_IMAGE
+		fi
+		;;
+	7)
+		TEMPLATE_VM_CI_IMAGE="$IMG_PATH/${CENTOS_9_URL##*/}"
+		if [ ! -f $TEMPLATE_VM_CI_IMAGE ]; then
+			wget -nc $CENTOS_9_URL -O $TEMPLATE_VM_CI_IMAGE
 		fi
 		;;
 	*)
