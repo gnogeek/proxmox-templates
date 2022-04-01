@@ -103,7 +103,7 @@ NET_BRIDGE="vmbr0"
 #wget -nc -O $IMG_NAME $SRC_IMG
 virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent
 qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
-qm importdisk $VMID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
+qm importdisk $TEMPLATE_VM_ID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
 qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
 qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
