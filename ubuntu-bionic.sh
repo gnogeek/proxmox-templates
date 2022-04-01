@@ -67,31 +67,33 @@ case $MEM_SIZE_GB in
                 ;;
 esac
 ### VM Disk
-echo -n "Disk Size Options:
+echo -n "Disk Options:
 1 - 10GB
 2 - 20GB
 3 - 40GB
-
-Select VM Memory option (1-5): "
+4 - 80GB
+5 - 160GB
+Select VM Disk option (1-5): "
 read DISK_SIZE_GB
 
 case $DISK_SIZE_GB in
 	1)
-	DISK_SIZE=10024
+	DISK_SIZE=10240
 	;;
 	2)
-		DISK_SIZE=20048
+		DISK_SIZE=20480
 	;;
 	3)
-		DISK_SIZE=40096
+		DISK_SIZE=40960
 	;;
 	4)
-		DISK_SIZE=80192
+		DISK_SIZE=81920
 	;;
 	5)
-		DISK_SIZE=160384
+		DISK_SIZE=163840
 	;;
-        *)                clear
+        *)
+                clear
                 echo "[Fail] - Unknown option - Run script again then choose a valid option."
                 exit
                 ;;
