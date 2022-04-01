@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir -p ~/Template/sshkey
+#cp ~/.ssh/id_rsa.pub 
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
 CORES="2"
@@ -8,6 +10,7 @@ DISK_STOR="local-lvm"
 NET_BRIDGE="vmbr0"
 SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
+virt-customize -a $IMG_NAME --install qemu-guest-agent
 wget -O $IMG_NAME $SRC_IMG
 qm create $VMID --name $TEMPL_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
 qm importdisk $VMID $IMG_NAME $DISK_STOR
@@ -17,6 +20,7 @@ qm set $VMID --boot c --bootdisk scsi0
 qm set $VMID --serial0 socket --vga serial0
 qm set $VMID --ipconfig0 ip=dhcp
 qm resize $VMID scsi0 $DISK_SIZE
-qm template $VMID
+qm set $VMID --sshkey ~/.ssh/id_rsa.pub
+#qm template $VMID
 # Remove downloaded image
-rm $IMG_NAME
+#rm $IMG_NAME
