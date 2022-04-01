@@ -5,7 +5,6 @@ echo "########## VM DETAILS ##########"
 
 echo -n "Type VM Name: "
 read TEMPLATE_VM_NAME
-### VM Storage
 
 ### VM TEMPLATE ID
 echo "Choose a UNIQ ID for VM, please, do not use any of bellow IDs"
@@ -13,13 +12,76 @@ pvesh get /cluster/resources --type vm|grep qemu|awk '{ print $2}'|cut -d"/" -f2
 echo -n "Type a uniq ID for VM: "
 read TEMPLATE_VM_ID
 
-echo "########## STORAGE ##########"
-echo ""
-echo Storage Availability|awk '{ printf "%-20s %-40s\n", $1, $2 }'
-pvesm status|grep active|awk '{ printf "%-20s %-40s\n", $1, $7 }'
-echo -n "Type name of Storage to install VM: "
+### VM Storage
+echo -n "Storage Options:
+1 - SSD
+2 - HDD
+
+Select VM Storage option (1-5): "
 read TEMPLATE_VM_STORAGE
 
+case $TEMPLATE_VM_STORAGE in
+	1)
+	TEMPLATE_VM_STORAGE=DATA-SSD
+	;;
+	2)
+		TEMPLATE_VM_STORAGE=DATA-HDD1
+	;;
+        *)
+                clear
+                echo "[Fail] - Unknown option - Run script again then choose a valid option."
+                exit
+                ;;
+esac
+
+### VM Memory
+echo -n "Memory Options:
+1 - 1GB
+2 - 2GB
+3 - 4GB
+
+Select VM Memory option (1-5): "
+read MEM_SIZE
+
+case $MEM_SIZE in
+	1)
+	MEM_SIZE=DATA-1024
+	;;
+	2)
+		MEM_SIZE=2048
+	;;
+			MEM_SIZE=4096
+	;;
+        *)
+                clear
+                echo "[Fail] - Unknown option - Run script again then choose a valid option."
+                exit
+                ;;
+esac
+### VM Disk
+echo -n "Disk Size Options:
+1 - 10GB
+2 - 20GB
+3 - 40GB
+
+Select VM Memory option (1-5): "
+read DISK_SIZE
+
+case $DISK_SIZE in
+	1)
+	DISK_SIZE=DATA-10G
+	;;
+	2)
+		DISK_SIZE=20G
+	;;
+			DISK_SIZE=40G
+	;;
+        *)
+                clear
+                echo "[Fail] - Unknown option - Run script again then choose a valid option."
+                exit
+                ;;
+esac
 # IMAGE PATH
 IMG_PATH="imgs"
 ### Check if imgs path exist
@@ -94,15 +156,14 @@ esac
 #TEMPL_NAME="ubuntu18.04-cloud"
 #VMID="9005"
 CORES="2"
-MEM="1024"
-DISK_SIZE="8G"
+#DISK_SIZE="8G"
 #DISK_STOR="local-lvm"
 NET_BRIDGE="vmbr0"
 #SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 #IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
 #wget -nc -O $IMG_NAME $SRC_IMG
 virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent
-qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM --net0 virtio,bridge=$NET_BRIDGE --core $CORES
+qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM_SIZE --net0 virtio,bridge=$NET_BRIDGE --core $CORES
 qm importdisk $TEMPLATE_VM_ID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
 qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
