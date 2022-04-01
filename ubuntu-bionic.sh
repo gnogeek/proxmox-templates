@@ -7,10 +7,9 @@ echo Storage Availability|awk '{ printf "%-20s %-40s\n", $1, $2 }'
 pvesm status|grep active|awk '{ printf "%-20s %-40s\n", $1, $7 }'
 echo -n "Type name of Storage to install VM: "
 read TEMPLATE_VM_STORAGE
-
-#mkdir -p ~/Template
+###mkdir -p ~/Template
 #cp ~/.ssh/id_rsa.pub
-clear
+####Parameters
 TEMPL_NAME="ubuntu18.04-cloud"
 VMID="9005"
 CORES="2"
