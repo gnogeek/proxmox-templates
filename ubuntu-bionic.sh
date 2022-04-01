@@ -77,16 +77,21 @@ read DISK_SIZE_GB
 
 case $DISK_SIZE_GB in
 	1)
-	DISK_SIZE=10240
+	DISK_SIZE=10024
 	;;
 	2)
-		DISK_SIZE=20480
+		DISK_SIZE=20048
 	;;
 	3)
-		DISK_SIZE=40960
-	;;	
-        *)
-                clear
+		DISK_SIZE=40096
+	;;
+	4)
+		DISK_SIZE=80192
+	;;
+	5)
+		DISK_SIZE=160384
+	;;
+        *)                clear
                 echo "[Fail] - Unknown option - Run script again then choose a valid option."
                 exit
                 ;;
