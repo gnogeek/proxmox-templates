@@ -1,6 +1,10 @@
 #!/bin/bash
 
 clear
+echo "########## VM DETAILS ##########"
+
+echo -n "Type VM Name: "
+read TEMPLATE_VM_NAME
 ### VM Storage
 clear
 echo "########## STORAGE ##########"
