@@ -73,16 +73,16 @@ echo -n "Disk Size Options:
 3 - 40GB
 
 Select VM Memory option (1-5): "
-read DISK_SIZE
+read DISK_SIZE_GB
 
-case $DISK_SIZE in
+case $DISK_SIZE_GB in
 	1)
-	DISK_SIZE=DATA-10G
+	DISK_SIZE=10240
 	;;
 	2)
-		DISK_SIZE=20G
+		DISK_SIZE=20480
 	;;
-			DISK_SIZE=40G
+			DISK_SIZE=40960
 	;;
         *)
                 clear
