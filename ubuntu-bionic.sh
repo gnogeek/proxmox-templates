@@ -1,4 +1,6 @@
 #!/bin/bash
+
+clear
 ### VM Storage
 # IMAGE PATH
 IMG_PATH="imgs"
