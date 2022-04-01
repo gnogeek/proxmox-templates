@@ -45,10 +45,10 @@ read MEM_SIZE
 
 case $MEM_SIZE in
 	1)
-	MEM_SIZE=DATA-1024
+	MEM_SIZE=1024
 	;;
 	2)
-		MEM_SIZE=2048
+	MEM_SIZE=2048
 	;;
 			MEM_SIZE=4096
 	;;
