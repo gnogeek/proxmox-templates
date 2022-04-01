@@ -107,7 +107,7 @@ qm importdisk $TEMPLATE_VM_ID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
 qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
 qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
-#qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
+qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
 qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
 qm set $TEMPLATE_VM_ID --ciuser gnolasco
 qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
