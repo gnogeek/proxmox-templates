@@ -81,16 +81,16 @@ case $DISK_SIZE in
 	DISK_SIZE=10G
 	;;
 	2)
-		DISK_SIZE=20480
+		DISK_SIZE=20G
 	;;
 	3)
-		DISK_SIZE=40960
+		DISK_SIZE=40G
 	;;
 	4)
-		DISK_SIZE=81920
+		DISK_SIZE=80G
 	;;
 	5)
-		DISK_SIZE=163840
+		DISK_SIZE=160G
 	;;
         *)
                 clear
