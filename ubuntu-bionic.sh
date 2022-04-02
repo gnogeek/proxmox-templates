@@ -212,3 +212,4 @@ qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
 #qm template $VMID
 # Remove downloaded image
 #rm $IMG_NAME
+##Test Text
