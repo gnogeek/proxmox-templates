@@ -78,7 +78,7 @@ read DISK_SIZE
 
 case $DISK_SIZE in
 	1)
-	DISK_SIZE=+7748M
+	DISK_SIZE=10G
 	;;
 	2)
 		DISK_SIZE=20480
