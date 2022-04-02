@@ -209,7 +209,3 @@ qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
 qm set $TEMPLATE_VM_ID --agent enabled=1
 qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
 qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
-#qm template $VMID
-# Remove downloaded image
-#rm $IMG_NAME
-##Test Text
