@@ -204,6 +204,7 @@ qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
 qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
 qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
 qm set $TEMPLATE_VM_ID --ciuser gnolasco
+qm set $TEMPLATE_VM_ID --cpu host
 qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
 qm set $TEMPLATE_VM_ID --agent enabled=1
 qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
