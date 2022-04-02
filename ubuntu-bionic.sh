@@ -74,11 +74,11 @@ echo -n "Disk Options:
 4 - 80GB
 5 - 160GB
 Select VM Disk option (1-5): "
-read DISK_SIZE_GB
+read DISK_SIZE
 
-case $DISK_SIZE_GB in
+case $DISK_SIZE in
 	1)
-	DISK_SIZE=10240
+	DISK_SIZE=+7748M
 	;;
 	2)
 		DISK_SIZE=20480
