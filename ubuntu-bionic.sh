@@ -16,6 +16,8 @@ read TEMPLATE_VM_ID
 echo -n "Storage Options:
 1 - SSD
 2 - HDD
+1 - Local
+2 - Local-LVM
 
 Select VM Storage option (1-5): "
 read TEMPLATE_VM_STORAGE
@@ -26,6 +28,12 @@ case $TEMPLATE_VM_STORAGE in
 	;;
 	2)
 		TEMPLATE_VM_STORAGE=DATA-HDD1
+	;;
+	3)
+		TEMPLATE_VM_STORAGE=local
+	;;
+	4)
+		TEMPLATE_VM_STORAGE=local-lvm
 	;;
         *)
                 clear
