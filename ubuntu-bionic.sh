@@ -122,6 +122,7 @@ UBUNTU_2110_URL="https://cloud-images.ubuntu.com/impish/current/impish-server-cl
 OPENSUSE_152_URL="https://download.opensuse.org/repositories/Cloud:/Images:/Leap_15.2/images/openSUSE-Leap-15.2-OpenStack.x86_64.qcow2"
 CENTOS_8_URL="https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-ec2-8-20220125.1.x86_64.qcow2"
 CENTOS_9_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220330.1.x86_64.qcow2"
+FEDORA_35_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2"
 
 ####
 echo "Available images are: "
@@ -134,6 +135,7 @@ echo -n "
 6 - OpenSUSE LEAP 15.02
 7 - CentOS 8
 8 - CentOS 9
+9 - Fedora 35
 "
 echo -n "Choose a Image template to install: "
 read OPT_IMAGE_TEMPLATE
@@ -185,6 +187,13 @@ case $OPT_IMAGE_TEMPLATE in
 		TEMPLATE_VM_CI_IMAGE="$IMG_PATH/${CENTOS_9_URL##*/}"
 		if [ ! -f $TEMPLATE_VM_CI_IMAGE ]; then
 			wget -nc $CENTOS_9_URL -O $TEMPLATE_VM_CI_IMAGE
+		fi
+		;;
+
+	9)
+		TEMPLATE_VM_CI_IMAGE="$IMG_PATH/${FEDORA_35_URL##*/}"
+		if [ ! -f $TEMPLATE_VM_CI_IMAGE ]; then
+			wget -nc $FEDORA_35_URL -O $TEMPLATE_VM_CI_IMAGE
 		fi
 		;;
 	*)
