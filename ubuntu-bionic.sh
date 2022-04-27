@@ -354,9 +354,9 @@ qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
 #Here we are going to set the network stuff from above
 if [[ $DHCPYESORNO =~ ^[Yy]$ || $DHCPYESORNO =~ ^[yY][eE][sS] ]]
 then
-    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=dhcp
+    qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
 else
-    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY --nameserver $NAMESERVER --searchdomain $SEARCHDOMAIN
+    qm set $TEMPLATE_VM_ID --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY --nameserver $NAMESERVER --searchdomain $SEARCHDOMAIN
 fi
 qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
@@ -366,6 +366,6 @@ qm set $TEMPLATE_VM_ID --agent enabled=1
 # Addding to the default disk size if selected from above
 if [[ $RESIZEDISK =~ ^[Yy]$ || $RESIZEDISK =~ ^[yY][eE][sS] ]]
 then
-    qm resize $VMID scsi0 +"$ADDDISKSIZE"G
+    qm resize $TEMPLATE_VM_ID scsi0 +"$ADDDISKSIZE"G
 fi
 #qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
