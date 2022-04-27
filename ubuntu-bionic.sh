@@ -178,6 +178,26 @@ do
         echo "Please try again gateway IP addresses did not match"
         echo
     done
+    while true; do
+        read -p "Enter nameserver IP address to use (format example 192.168.1.1): " NAMESERVER
+        echo
+        read -p "Please repeate nameserver IP address to use (format example 192.168.1.1): " NAMESERVER2
+        echo
+        [ "$NAMESERVER" = "$NAMESERVER2" ] && break
+        echo
+        echo "Please try again nameserver IP addresses did not match"
+        echo
+    done
+    while true; do
+        read -p "Enter SearchDomain IP address to use (format example example.com): " SEARCHDOMAIN
+        echo
+        read -p "Please repeate SearchDomain IP address to use (format example example.com): " SEARCHDOMAIN2
+        echo
+        [ "$SEARCHDOMAIN" = "$SEARCHDOMAIN2" ] && break
+        echo
+        echo "Please try again SearchDomain addresses did not match"
+        echo
+    done    
     echo
  break
         ;;
@@ -336,7 +356,7 @@ if [[ $DHCPYESORNO =~ ^[Yy]$ || $DHCPYESORNO =~ ^[yY][eE][sS] ]]
 then
     qm set $TEMPLATE_VM_NAME --ipconfig0 ip=dhcp
 else
-    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY
+    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY --nameserver $NAMESERVER --searchdomain $SEARCHDOMAIN
 fi
 qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
