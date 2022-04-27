@@ -146,6 +146,77 @@ do
 done
 echo
 
+# Setting DCHP or a Static IP
+echo
+while true
+do
+ read -p "Enter Yes/Y to use DHCP for IP or Enter No/N to set a static IP address: " DHCPYESORNO
+
+ case $DHCPYESORNO in
+     [yY][eE][sS]|[yY])
+ break
+ ;;
+     [nN][oO]|[nN])
+    while true; do
+        echo
+        read -p "Enter IP address to use (format example 192.168.1.50/24): " IPADDRESS
+        echo
+        read -p "Please repeat IP address to use (format example 192.168.1.50/24): " IPADDRESS2
+        echo
+        [ "$IPADDRESS" = "$IPADDRESS2" ] && break
+        echo
+        echo "Please try again IP addresses did not match"
+        echo
+    done
+    while true; do
+        read -p "Enter gateway IP address to use (format example 192.168.1.1): " GATEWAY
+        echo
+        read -p "Please repeate gateway IP address to use (format example 192.168.1.1): " GATEWAY2
+        echo
+        [ "$GATEWAY" = "$GATEWAY2" ] && break
+        echo
+        echo "Please try again gateway IP addresses did not match"
+        echo
+    done
+    echo
+ break
+        ;;
+     *)
+ echo "Invalid input, please enter Y/n or yes/no"
+ ;;
+ esac
+done
+echo
+
+#Checking to see what VMBR interface you want to use
+echo
+echo "Please select VMBR to use for your network"
+declare -a vmbrs=$(awk '{if(/vmbr/) print $2}' /etc/network/interfaces)
+declare -a vmbrsavail=( $(printf "%s\n" "${vmbrs[@]}" | sort -u) )
+
+cnt=${#vmbrsavail[@]}
+for (( i=0;i<cnt;i++)); do
+    vmbrsavail[i]="${vmbrsavail[i]}"
+done
+total_num_vmbrs=${#vmbrsavail[@]}
+vmbrsavail2=$( echo ${vmbrsavail[@]} )
+
+select option in $vmbrsavail2; do
+if [ 1 -le "$REPLY" ] && [ "$REPLY" -le $total_num_vmbrs ];
+then
+#        echo "The selected option is $REPLY"
+#        echo "The selected storage is $option"
+        vmbrused=$option
+        break;
+else
+        echo "Incorrect Input: Select a number 1-$total_num_vmbrs"
+fi
+done
+
+echo "Your network bridge will be on " $vmbrused
+echo
+echo
+
 # IMAGE PATH
 IMG_PATH="imgs"
 ### Check if imgs path exist
@@ -248,18 +319,25 @@ esac
 CORES="2"
 #DISK_SIZE="8G"
 #DISK_STOR="local-lvm"
-NET_BRIDGE="vmbr0"
+#NET_BRIDGE="vmbr0"
 #SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 #IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
 #wget -nc -O $IMG_NAME $SRC_IMG
 virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent
-qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM_SIZE --net0 virtio,bridge=$NET_BRIDGE --core $CORES
+qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM_SIZE --net0 virtio,bridge=$vmbrused --core $CORES
 qm importdisk $TEMPLATE_VM_ID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
 qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
 qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
 qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
-qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
+#qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
+#Here we are going to set the network stuff from above
+if [[ $DHCPYESORNO =~ ^[Yy]$ || $DHCPYESORNO =~ ^[yY][eE][sS] ]]
+then
+    qm set $VMID --ipconfig0 ip=dhcp
+else
+    qm set $VMID --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY
+fi
 qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
 qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
