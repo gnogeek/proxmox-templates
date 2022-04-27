@@ -10,31 +10,53 @@ echo "Choose a UNIQ ID for VM, please, do not use any of bellow IDs"
 pvesh get /cluster/resources --type vm|grep qemu|awk '{ print $2}'|cut -d"/" -f2
 echo -n "Type a uniq ID for VM: "
 read TEMPLATE_VM_ID
+#####
+## Selecting the Storage th VM will run on
+echo "Please select the storage the VM will run on?"
+storageavail=$(awk '{if(/:/) print $2}' /etc/pve/storage.cfg)
+typestorage=$(echo "${storageavail[@]}")
+declare -a allstorage=( ${typestorage[@]} )
+total_num_storage=${#allstorage[@]}
+allstorage2=$( echo ${allstorage[@]} )
+
+select option in $allstorage2; do
+if [ 1 -le "$REPLY" ] && [ "$REPLY" -le $total_num_storage ];
+then
+        TEMPLATE_VM_STORAGE=$option
+        break;
+else
+        echo "Incorrect Input: Select a number 1-$total_num_storage"
+fi
+done
+
+echo
+echo "The storage you selected for the VM is $TEMPLATE_VM_STORAGE"
+
+
 ### VM Storage
-echo -n "Storage Options:
-1 - SSD
-2 - HDD
-3 - RAID-10
-
-Select VM Storage option (1-5): "
-read TEMPLATE_VM_STORAGE
-
-case $TEMPLATE_VM_STORAGE in
-	1)
-	TEMPLATE_VM_STORAGE=DATA-SSD
-	;;
-	2)
-		TEMPLATE_VM_STORAGE=DATA-HDD1
-	;;
-	3)
-		TEMPLATE_VM_STORAGE=local-zfs
-	;;
-        *)
-                clear
-                echo "[Fail] - Unknown option - Run script again then choose a valid option."
-                exit
-                ;;
-esac
+#echo -n "Storage Options:
+#1 - SSD
+#2 - HDD
+#3 - RAID-10
+#
+##Select VM Storage option (1-5): "
+#read TEMPLATE_VM_STORAGE
+#
+#case $TEMPLATE_VM_STORAGE in
+#	1)
+#	TEMPLATE_VM_STORAGE=DATA-SSD
+#	;;
+#		TEMPLATE_VM_STORAGE=DATA-HDD1
+#	;;
+#	3)
+#		TEMPLATE_VM_STORAGE=local-zfs
+#	;;
+#        *)
+#               clear
+#               echo "[Fail] - Unknown option - Run script again then choose a valid option."
+#                exit
+#                ;;
+#esac
 
 ### VM Memory
 echo -n "Memory Options:
