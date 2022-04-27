@@ -178,26 +178,6 @@ do
         echo "Please try again gateway IP addresses did not match"
         echo
     done
-    while true; do
-        read -p "Enter nameserver IP address to use (format example 192.168.1.1): " NAMESERVER
-        echo
-        read -p "Please repeate nameserver IP address to use (format example 192.168.1.1): " NAMESERVER2
-        echo
-        [ "$NAMESERVER" = "$NAMESERVER2" ] && break
-        echo
-        echo "Please try again nameserver IP addresses did not match"
-        echo
-    done
-    while true; do
-        read -p "Enter SearchDomain IP address to use (format example example.com): " SEARCHDOMAIN
-        echo
-        read -p "Please repeate SearchDomain IP address to use (format example example.com): " SEARCHDOMAIN2
-        echo
-        [ "$SEARCHDOMAIN" = "$SEARCHDOMAIN2" ] && break
-        echo
-        echo "Please try again SearchDomain addresses did not match"
-        echo
-    done    
     echo
  break
         ;;
