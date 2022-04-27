@@ -91,37 +91,61 @@ case $MEM_SIZE_GB in
                 ;;
 esac
 ### VM Disk
-echo -n "Disk Options:
-1 - 10GB
-2 - 20GB
-3 - 40GB
-4 - 80GB
-5 - 160GB
-Select VM Disk option (1-5): "
-read DISK_SIZE
+#echo -n "Disk Options:
+#1 - 10GB
+#2 - 20GB
+#3 - 40GB
+#4 - 80GB
+#5 - 160GB
+#Select VM Disk option (1-5): "
+#read DISK_SIZE
+#
+#case $DISK_SIZE in
+#	1)
+#	DISK_SIZE=10G
+#	;;
+#	2)
+#		DISK_SIZE=20G
+#	;;
+#	3)
+#		DISK_SIZE=40G
+#	;;
+#	4)
+#		DISK_SIZE=80G
+#	;;
+#	5)
+#		DISK_SIZE=160G
+#	;;
+#        *)
+#                clear
+#                echo "[Fail] - Unknown option - Run script again then choose a valid option."
+#                exit
+#                ;;
+#esac
+## This next section is asking if you need to resize the root disk so its jsut not the base size from the cloud image
+while true
+do
+ read -r -p "Would you like to resize the base cloud image disk (Enter Y/N?) " RESIZEDISK
 
-case $DISK_SIZE in
-	1)
-	DISK_SIZE=10G
-	;;
-	2)
-		DISK_SIZE=20G
-	;;
-	3)
-		DISK_SIZE=40G
-	;;
-	4)
-		DISK_SIZE=80G
-	;;
-	5)
-		DISK_SIZE=160G
-	;;
-        *)
-                clear
-                echo "[Fail] - Unknown option - Run script again then choose a valid option."
-                exit
-                ;;
-esac
+ case $RESIZEDISK in
+     [yY][eE][sS]|[yY])
+ echo
+ echo "Please enter in GB's (exampe 2 for adding 2GB to the resize) how much space you want to add: "
+ echo
+ read -p "Enter size in Gb's: " ADDDISKSIZE
+ break
+ ;;
+     [nN][oO]|[nN])
+ RESIZEDISK=n
+ break
+        ;;
+     *)
+ echo "Invalid input, please enter Y/n or yes/no"
+ ;;
+ esac
+done
+echo
+
 # IMAGE PATH
 IMG_PATH="imgs"
 ### Check if imgs path exist
@@ -240,5 +264,10 @@ qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
 qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
 qm set $TEMPLATE_VM_ID --agent enabled=1
-qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
+#qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
+# Addding to the default disk size if selected from above
+if [[ $RESIZEDISK =~ ^[Yy]$ || $RESIZEDISK =~ ^[yY][eE][sS] ]]
+then
+    qm resize $VMID scsi0 +"$ADDDISKSIZE"G
+fi
 #qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
