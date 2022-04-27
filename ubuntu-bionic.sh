@@ -334,9 +334,9 @@ qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
 #Here we are going to set the network stuff from above
 if [[ $DHCPYESORNO =~ ^[Yy]$ || $DHCPYESORNO =~ ^[yY][eE][sS] ]]
 then
-    qm set $VMID --ipconfig0 ip=dhcp
+    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=dhcp
 else
-    qm set $VMID --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY
+    qm set $TEMPLATE_VM_NAME --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY
 fi
 qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
