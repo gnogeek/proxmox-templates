@@ -336,7 +336,7 @@ if [[ $DHCPYESORNO =~ ^[Yy]$ || $DHCPYESORNO =~ ^[yY][eE][sS] ]]
 then
     qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
 else
-    qm set $TEMPLATE_VM_ID --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY --nameserver $NAMESERVER --searchdomain $SEARCHDOMAIN
+    qm set $TEMPLATE_VM_ID --ipconfig0 ip=$IPADDRESS,gw=$GATEWAY
 fi
 qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
