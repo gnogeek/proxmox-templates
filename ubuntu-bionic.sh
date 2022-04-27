@@ -5,7 +5,6 @@ echo "########## VM DETAILS ##########"
 
 echo -n "Type VM Name: "
 read TEMPLATE_VM_NAME
-
 ### VM TEMPLATE ID
 echo "Choose a UNIQ ID for VM, please, do not use any of bellow IDs"
 pvesh get /cluster/resources --type vm|grep qemu|awk '{ print $2}'|cut -d"/" -f2
