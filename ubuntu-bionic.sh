@@ -10,7 +10,6 @@ echo "Choose a UNIQ ID for VM, please, do not use any of bellow IDs"
 pvesh get /cluster/resources --type vm|grep qemu|awk '{ print $2}'|cut -d"/" -f2
 echo -n "Type a uniq ID for VM: "
 read TEMPLATE_VM_ID
-
 ### VM Storage
 echo -n "Storage Options:
 1 - SSD
