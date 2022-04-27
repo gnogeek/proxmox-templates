@@ -16,8 +16,7 @@ read TEMPLATE_VM_ID
 echo -n "Storage Options:
 1 - SSD
 2 - HDD
-1 - Local
-2 - Local-LVM
+3 - RAID-10
 
 Select VM Storage option (1-5): "
 read TEMPLATE_VM_STORAGE
@@ -30,10 +29,7 @@ case $TEMPLATE_VM_STORAGE in
 		TEMPLATE_VM_STORAGE=DATA-HDD1
 	;;
 	3)
-		TEMPLATE_VM_STORAGE=local
-	;;
-	4)
-		TEMPLATE_VM_STORAGE=local-lvm
+		TEMPLATE_VM_STORAGE=local-zfs
 	;;
         *)
                 clear
@@ -220,9 +216,9 @@ qm set $TEMPLATE_VM_ID --ide2 $TEMPLATE_VM_STORAGE:cloudinit
 qm set $TEMPLATE_VM_ID --boot c --bootdisk scsi0
 qm set $TEMPLATE_VM_ID --serial0 socket --vga serial0
 qm set $TEMPLATE_VM_ID --ipconfig0 ip=dhcp
-qm set $TEMPLATE_VM_ID --ciuser gnolasco
+qm set $TEMPLATE_VM_ID --ciuser admin
 qm set $TEMPLATE_VM_ID --cpu host
 qm set $TEMPLATE_VM_ID --cipassword Gnh921014**
 qm set $TEMPLATE_VM_ID --agent enabled=1
 qm resize $TEMPLATE_VM_ID scsi0 $DISK_SIZE
-qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
+#qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
