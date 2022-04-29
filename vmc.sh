@@ -352,4 +352,4 @@ if [[ $RESIZEDISK =~ ^[Yy]$ || $RESIZEDISK =~ ^[yY][eE][sS] ]]
 then
     qm resize $TEMPLATE_VM_ID scsi0 +"$ADDDISKSIZE"G
 fi
-#qm set $TEMPLATE_VM_ID --sshkey ~/.ssh/id_rsa.pub
+qm set $TEMPLATE_VM_ID --sshkey /keys/id_rsa.pub
