@@ -65,7 +65,8 @@ echo -n "Memory Options:
 3 - 4GB
 4 - 8GB
 5 - 16GB
-Select VM Memory option (1-5): "
+6 - 512MB
+Select VM Memory option (1-6): "
 read MEM_SIZE_GB
 
 case $MEM_SIZE_GB in
@@ -83,6 +84,9 @@ case $MEM_SIZE_GB in
 	;;
 	5)
 		MEM_SIZE=16384
+	;;
+	6)
+		MEM_SIZE=512
 	;;
         *)
                 clear
