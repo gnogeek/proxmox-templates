@@ -235,7 +235,7 @@ UBUNTU_1804_URL="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cl
 UBUNTU_2004_URL="https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img"
 UBUNTU_2110_URL="https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img"
 OPENSUSE_152_URL="https://download.opensuse.org/repositories/Cloud:/Images:/Leap_15.2/images/openSUSE-Leap-15.2-OpenStack.x86_64.qcow2"
-CENTOS_8_URL="https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-ec2-8-20220125.1.x86_64.qcow2"
+CENTOS_8_URL="https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-GenericCloud-8-20210603.0.x86_64.qcow2"
 CENTOS_9_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220330.1.x86_64.qcow2"
 FEDORA_35_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/35/Cloud/x86_64/images/Fedora-Cloud-Base-35-1.2.x86_64.qcow2"
 
