@@ -327,7 +327,7 @@ CORES="2"
 #SRC_IMG="https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
 #IMG_NAME="bionic-server-cloudimg-amd64.qcow2"
 #wget -nc -O $IMG_NAME $SRC_IMG
-virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent,curl,wget --update
+virt-customize -a $TEMPLATE_VM_CI_IMAGE --install qemu-guest-agent,curl,wget,docker-ce,docker-compose --update
 qm create $TEMPLATE_VM_ID --name $TEMPLATE_VM_NAME --memory $MEM_SIZE --net0 virtio,bridge=$vmbrused --core $CORES
 qm importdisk $TEMPLATE_VM_ID $TEMPLATE_VM_CI_IMAGE $TEMPLATE_VM_STORAGE
 qm set $TEMPLATE_VM_ID --scsihw virtio-scsi-pci --scsi0 $TEMPLATE_VM_STORAGE:vm-$TEMPLATE_VM_ID-disk-0
